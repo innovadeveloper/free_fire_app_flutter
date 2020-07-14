@@ -19,10 +19,9 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           headline6: TextStyle(
-            fontSize: 28.0,
-            // fontStyle: FontStyle.italic,
-            fontFamily: 'Poppins'
-          ),
+              fontSize: 28.0,
+              // fontStyle: FontStyle.italic,
+              fontFamily: 'Poppins'),
           bodyText2: TextStyle(
             fontSize: 14.0,
           ),
@@ -45,19 +44,22 @@ class HomePage extends StatelessWidget {
     return Stack(
       children: <Widget>[
         _createBackground(context),
-        Column(
-          children: <Widget>[
-            _createTitle(context),
-          ],
+        SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              _createTitle(context),
+              _createCharactersTable(context),
+            ],
+          ),
         )
       ],
     );
   }
 
-
   Widget _createTitle(BuildContext context) {
     return SafeArea(
       child: Container(
+        // color: Colors.red,
         padding: EdgeInsets.all(20.0),
         width: double.infinity, // all width
         child: Text(
@@ -66,6 +68,66 @@ class HomePage extends StatelessWidget {
               .textTheme
               .headline6
               .copyWith(color: Colors.white, fontWeight: FontWeight.w700),
+        ),
+      ),
+    );
+  }
+
+  Widget _createCharactersTable(BuildContext context) {
+    return Table(
+      children: <TableRow>[
+        TableRow(
+          children: <Widget>[
+            _createCharacterColumn(context, Colors.green),
+            _createCharacterColumn(context, Colors.red),
+          ],
+        ),
+        TableRow(
+          children: <Widget>[
+            _createCharacterColumn(context, Colors.green),
+            _createCharacterColumn(context, Colors.red),
+          ],
+        ),
+        TableRow(
+          children: <Widget>[
+            _createCharacterColumn(context, Colors.green),
+            _createCharacterColumn(context, Colors.red),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _createCharacterColumn(BuildContext context, Color color) {
+    final cornerRadius = 10.0;
+
+    return ClipRect(
+      child: Container(
+        margin: EdgeInsets.all(10.0),
+        height: 300,
+        child: Card(
+          elevation: 4.0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(cornerRadius)),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(cornerRadius),
+            ),
+            // color: Colors.red,
+            child: Center(
+              child: Stack(
+                children: <Widget>[
+                  // Center(child: CircularProgressIndicator()),
+                  FadeInImage.assetNetwork(
+                    placeholder: 'assets/images/loading.gif',
+                    image:
+                        'https://www.pockettactics.com/wp-content/uploads/2020/05/garena-free-fire-a124-628x913.jpg',
+                  ),
+                  
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
